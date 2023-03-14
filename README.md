@@ -8,7 +8,7 @@ Logistic application to plan routes for drivers.
 
 - install node.js
 - install docker
-- pull repository
+- clone repository
 - run docker
 - run "docker-compose build" in project folder
 - run "docker-compose up" in project folder
