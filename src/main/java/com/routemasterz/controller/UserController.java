@@ -1,5 +1,6 @@
 package com.routemasterz.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,17 +16,17 @@ public class UserController {
         return null;
     }
 
-    @PostMapping(path = "/setEmail")
+    @PostMapping(path = "/setEmail",  produces = MediaType.APPLICATION_JSON_VALUE)
     public String setEmail(@RequestBody UserRequest request) {
         return userService.setEmail(request);
     }
 
-    @PostMapping(path = "/setNewPassword")
+    @PostMapping(path = "/setNewPassword",  produces = MediaType.APPLICATION_JSON_VALUE)
     public String setNewPassword(@RequestBody UserRequest request) {
         return userService.setNewPassword(request);
     }
 
-    @PostMapping(path = "/logout")
+    @PostMapping(path = "/logout",  produces = MediaType.APPLICATION_JSON_VALUE)
     public String logout(@RequestBody UserRequest request) {
         return userService.logout(request);
     }

@@ -1,9 +1,7 @@
 package com.routemasterz.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TrucksFleetController {
@@ -21,13 +19,15 @@ public class TrucksFleetController {
         return null;
     }
 
-    @PostMapping(path = "/driver/truck")
+    @PostMapping(path = "/driver/truck",  produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String setTruckInfo(@RequestBody DriverTruckRequest request) {
         return truckService.setTruckInfo(request);
     }
 
-    @PostMapping(path = "/logistician/trucks/{worker_id}")
-    public String addRoute(@RequestBody LogisticianTruckRequest request) {
-        return truckService.addRoute(request);
+    @PostMapping(path = "/logistician/trucks", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String addRoutes(@RequestBody LogisticianSetRouteRequest request) {
+        return truckService.addRoutes(request);
     }
 }
