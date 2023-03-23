@@ -1,0 +1,7 @@
+.app {
+    display: flex;
+    justify-content: flex-start;
+    background: #8685EF;
+    width: 100%;
+}
+
