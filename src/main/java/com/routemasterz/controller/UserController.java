@@ -1,33 +1,38 @@
 package com.routemasterz.controller;
 
+import com.routemasterz.dto.SetEmailRequest;
+import com.routemasterz.dto.SetNewPasswordRequest;
+import com.routemasterz.service.UserService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/app")
 public class UserController {
 
     private final UserService userService;
 
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping(path = "/userAccount")
-    public String userAccount() {
-        return null;
+    public String showUserAccountView() {
+        return "userAccount";
     }
 
     @PostMapping(path = "/setEmail",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String setEmail(@RequestBody UserRequest request) {
+    public String setEmail(@RequestBody SetEmailRequest request) {
         return userService.setEmail(request);
     }
 
     @PostMapping(path = "/setNewPassword",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String setNewPassword(@RequestBody UserRequest request) {
+    public String setNewPassword(@RequestBody SetNewPasswordRequest request) {
         return userService.setNewPassword(request);
     }
 
     @PostMapping(path = "/logout",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String logout(@RequestBody UserRequest request) {
-        return userService.logout(request);
+    public String logout() {
+        return userService.logout();
     }
 }

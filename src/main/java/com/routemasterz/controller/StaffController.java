@@ -1,15 +1,21 @@
 package com.routemasterz.controller;
 
+import com.routemasterz.dto.DeleteRouteRequest;
+import com.routemasterz.dto.ShowStaffRequest;
+import com.routemasterz.dto.UserRoleRequest;
+import com.routemasterz.service.StaffService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/app")
 public class StaffController {
 
     private final StaffService staffService;
+
+    public StaffController(StaffService staffService) {
+        this.staffService = staffService;
+    }
 
     @GetMapping(path = "/admin")
     public String adminPanel() {
