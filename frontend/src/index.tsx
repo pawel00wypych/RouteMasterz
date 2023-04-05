@@ -6,6 +6,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Login from './views/Login/Login';
 import Register from "./views/Register/Register";
+import LogisticianMap from "./views/Logistician/Map/LogisticianMap"
+import DriverMap from "./views/Driver/Map/DriverMap"
+
 
 const router = createBrowserRouter([
     {
@@ -16,6 +19,16 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Register />,
+        errorElement: <div>404</div>,
+    },
+    {
+        path: '/logistician/map',
+        element: <LogisticianMap />,
+        errorElement: <div>404</div>,
+    },
+    {
+        path: '/driver/map',
+        element: <DriverMap />,
         errorElement: <div>404</div>,
     },
 ]);

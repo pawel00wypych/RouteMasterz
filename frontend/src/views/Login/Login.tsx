@@ -10,12 +10,16 @@ import signIn from '../../resources/img/signIn.svg';
 import pageStyle from '../../components/Page/Page.module.css';
 
 import Input from '../../components/FormInput/FormInput';
-import Button from "../../components/Buttons/FormButton/FormButton";
-import ButtonContainer from "../../components/Containers/FormContainer/ButtonContainer/ButtonContainer";
-import TitleContainer from "../../components/Containers/FormContainer/TitleContainer/TitleContainer";
+import Button from "../../components/Buttons/FormButton";
+import ButtonContainer from "../../components/Containers/ButtonContainer/ButtonContainer";
+import TitleContainer from "../../components/Containers/TitleContainer/TitleContainer";
+// @ts-ignore
+import buttonStyle from "../../components/Buttons/FormButton.module.css"
 // @ts-ignore
 import style from './Login.module.css';
 import {Link} from "react-router-dom";
+// @ts-ignore
+import inputStyle from '../../components/FormInput/FormInput.module.css';
 function Login() {
 
     return (
@@ -26,14 +30,14 @@ function Login() {
                 <TitleContainer>
                     Login
                 </TitleContainer>
-                <Input text="email@example.com" />
-                <Input text="password" />
+                <Input className={inputStyle.input} text="email@example.com" />
+                <Input className={inputStyle.input} text="password" />
                 <div id={style.emptyDiv}></div>
 
                 <ButtonContainer>
-                    <Button  src={signIn} iconHeight={"60px"} iconWidth={"60px"}/>
+                    <Button className={buttonStyle.formButton}  src={signIn} iconHeight={"60px"} iconWidth={"60px"}/>
                     <Link to='/register'>
-                        <Button text="Register" />
+                        <Button className={buttonStyle.formButton} text="Register" />
                     </Link>
                 </ButtonContainer>
             </FormContainer>

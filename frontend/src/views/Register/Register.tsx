@@ -9,10 +9,15 @@ import signUp from '../../resources/img/signUp.svg';
 import pageStyle from '../../components/Page/Page.module.css';
 
 import Input from '../../components/FormInput/FormInput';
-import Button from "../../components/Buttons/FormButton/FormButton";
-import ButtonContainer from "../../components/Containers/FormContainer/ButtonContainer/ButtonContainer";
-import TitleContainer from "../../components/Containers/FormContainer/TitleContainer/TitleContainer";
+import Button from "../../components/Buttons/FormButton";
+import ButtonContainer from "../../components/Containers/ButtonContainer/ButtonContainer";
+import TitleContainer from "../../components/Containers/TitleContainer/TitleContainer";
 import {Link} from "react-router-dom";
+// @ts-ignore
+import buttonStyle from "../../components/Buttons/FormButton.module.css";
+// @ts-ignore
+import inputStyle from '../../components/FormInput/FormInput.module.css';
+
 function Register() {
 
     return (
@@ -23,14 +28,14 @@ function Register() {
                 <TitleContainer>
                     Register
                 </TitleContainer>
-                <Input text="email@example.com" />
-                <Input text="password" />
-                <Input text="password confirmation" />
-                <Input text="full name" />
+                <Input className={inputStyle.input} text="email@example.com" />
+                <Input className={inputStyle.input} text="password" />
+                <Input className={inputStyle.input} text="password confirmation" />
+                <Input className={inputStyle.input} text="full name" />
                 <ButtonContainer>
-                    <Button src={signUp} iconHeight={"110px"} iconWidth={"110px"}/>
+                    <Button className={buttonStyle.formButton} src={signUp} iconHeight={"110px"} iconWidth={"110px"}/>
                     <Link to='/'>
-                        <Button text="Login" />
+                        <Button className={buttonStyle.formButton} text="Login" />
                     </Link>
                 </ButtonContainer>
             </FormContainer>

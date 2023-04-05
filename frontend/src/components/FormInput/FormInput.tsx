@@ -5,7 +5,7 @@ import style from './FormInput.module.css';
 
 
 export interface FormInputProps {
-    text: string;
+    text?: string;
     width?: string;
     onClick?: () => void;
     className?: string;
@@ -34,7 +34,7 @@ export default class FormInput extends Component<FormInputProps, InputState> {
 
     render() {
         return (
-            <input ref={this.props.useRef} placeholder={this.props.text} className={style.input} onClick={this.props.onClick} type='text' id={this.props.id} />
+            <input ref={this.props.useRef} placeholder={this.props.text} className={this.props.className} onClick={this.props.onClick} type='text' id={this.props.id} />
         );
     }
 }

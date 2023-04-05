@@ -1,0 +1,75 @@
+.formButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8em;
+    height: 3em;
+    background: #202031;
+    border: 3px solid #3A3A55;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    margin-right: 2em;
+    margin-left: 2em;
+
+    font-size: 32px;
+    line-height: 70px;
+
+    color: #FFFFFF;
+}
+
+.topBarButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6em;
+    height: 2.5em;
+    background: #202031;
+    border: 3px solid #3A3A55;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    margin-right: 1.5em;
+    margin-left: 2.5em;
+
+    font-size: 32px;
+    line-height: 70px;
+
+    color: #FFFFFF;
+}
+
+.saveRouteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 21em;
+    height: 4em;
+    box-sizing: border-box;
+
+    background: #202031;
+    border: 3px solid #1E1D26;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    font-size: 25px;
+    line-height: 70px;
+    margin-top: 1em;
+}
+
+.addPoint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: 3.5em;
+    height: 2.2em;
+    box-sizing: border-box;
+
+    background: #FF9315;
+    border: 3px solid #1E1D26;
+    border-radius: 60px;
+
+    font-size: 25px;
+    line-height: 70px;
+    margin-top: 1em;
+}

@@ -19,3 +19,44 @@
 .input:focus {
     outline: none;
 }
+
+.mapSearch {
+    text-align: center;
+    width: 21em;
+    height: 2.5em;
+
+    background: #5A5A74;
+    border: 4px solid #FF9315;
+    border-radius: 16px;
+
+    margin-top: 1.3em;
+
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.mapSearch::placeholder {
+    color: white;
+}
+
+.mapSearch:focus {
+    outline: none;
+}
+
+.chooseHour {
+    text-align: center;
+    width: 3.5em;
+    height: 2.2em;
+
+    box-sizing: border-box;
+    background: #586B7D;
+    border: 3px solid #1E1D26;
+    border-radius: 12px;
+
+    margin-top: 1em;
+
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+}
