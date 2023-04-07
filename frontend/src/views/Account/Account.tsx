@@ -42,12 +42,21 @@ function DriverMap() {
                         <CustomContainer className={style.userContainer}>
                             <img src={face} className={style.photo} alt={''}/>
                             <CustomContainer className={style.userInfo}>
-                                Route Name
+                                John Doe
                             </CustomContainer>
                         </CustomContainer>
-                        <FormInput className={inputStyle.input} text={"111222333"}/>
-                        <FormInput className={inputStyle.input} text={"password"}/>
-                        <FormInput className={inputStyle.input} text={"confirm password"}/>
+                        <CustomContainer className={style.bottomContainer}>
+                            <CustomContainer className={style.inputContainer}>
+                                <FormInput className={inputStyle.input} text={"111222333"}/>
+                                <FormInput className={inputStyle.input} text={"password"}/>
+                                <FormInput className={inputStyle.input} text={"confirm password"}/>
+                            </CustomContainer>
+                            <CustomContainer className={style.buttonContainer}>
+                                <Button className={buttonStyle.accountButton} text={"Set Phone"}/>
+                                <div  id={style.emptyButtonDiv}/>
+                                <Button className={buttonStyle.accountButton} text={"Set Password"}/>
+                            </CustomContainer>
+                        </CustomContainer>
                     </CustomContainer>
                 </MidContainer>
             </MainContainer>
