@@ -9,6 +9,8 @@ import Register from "./views/Register/Register";
 import LogisticianMap from "./views/Logistician/Map/LogisticianMap";
 import DriverMap from "./views/Driver/Map/DriverMap";
 import Account from "./views/Account/Account";
+import DriverTruck from "./views/Driver/Truck/DriverTruck";
+import LogisticianTrucks from "./views/Logistician/Trucks/LogisticianTrucks";
 
 
 const router = createBrowserRouter([
@@ -35,6 +37,16 @@ const router = createBrowserRouter([
     {
         path: '/account',
         element: <Account />,
+        errorElement: <div>404</div>,
+    },
+    {
+        path: '/driver/truck',
+        element: <DriverTruck />,
+        errorElement: <div>404</div>,
+    },
+    {
+        path: '/logistician/trucks',
+        element: <LogisticianTrucks />,
         errorElement: <div>404</div>,
     },
 ]);

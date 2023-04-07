@@ -60,3 +60,16 @@
     font-size: 25px;
     line-height: 50px;
 }
+
+.truckInput {
+    text-align: center;
+    width: 20em;
+    height: 3em;
+    background: #5A5A74;
+    border: 3px solid #1E1D26;
+    border-radius: 25px;
+    margin-top: 1.3em;
+
+    font-size: 25px;
+    line-height: 50px;
+}
