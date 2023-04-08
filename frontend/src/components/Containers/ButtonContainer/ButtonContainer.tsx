@@ -17,7 +17,7 @@ export default class ButtonContainer extends Component<ButtonContainerProps> {
     };
     render() {
         return (
-            <div className={style.buttonContainer}
+            <div className={[style.buttonContainer, this.props.className].join(' ')}
                  style={{ width: this.props.width, height: this.props.height }}>
                 {this.props.children}
             </div>

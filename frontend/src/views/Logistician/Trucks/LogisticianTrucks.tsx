@@ -15,6 +15,8 @@ import inputStyle from "../../../components/FormInput/FormInput.module.css";
 import Button from "../../../components/Buttons/FormButton";
 // @ts-ignore
 import buttonStyle from "../../../components/Buttons/FormButton.module.css";
+import DayContainer from "../../../components/Containers/DayContainer/DayContainer";
+import ButtonContainer from "../../../components/Containers/ButtonContainer/ButtonContainer";
 
 function LogisticianTrucks() {
 
@@ -24,13 +26,18 @@ function LogisticianTrucks() {
                 <TopBar/>
                 <MidContainer>
                     <CustomContainer className={style.user}>
-                        <CustomContainer className={style.leftContainer}>
-                        </CustomContainer>
-                        <CustomContainer className={style.rightContainer}>
-                        </CustomContainer>
+
                     </CustomContainer>
                     <CustomContainer className={style.setRoutes}>
-
+                        <div id={style.employee}>
+                            Will Smith  will@email.com
+                        </div>
+                        <DayContainer day={"09.04"} text={"new route"}/>
+                        <DayContainer day={"10.04"} text={"new route"}/>
+                        <DayContainer day={"11.04"} text={"new route"}/>
+                        <DayContainer day={"12.04"} text={"new route"}/>
+                        <DayContainer day={"13.04"} text={"new route"}/>
+                        <ButtonContainer className={style.button}>Add Routes</ButtonContainer>
                     </CustomContainer>
                 </MidContainer>
 
