@@ -63,7 +63,6 @@
     box-sizing: border-box;
     width: 3.5em;
     height: 2.2em;
-    box-sizing: border-box;
 
     background: #FF9315;
     border: 3px solid #1E1D26;
@@ -72,4 +71,22 @@
     font-size: 25px;
     line-height: 70px;
     margin-top: 1em;
+}
+
+.accountButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: 7em;
+    height: 3em;
+
+    background: #FF9315;
+    border: 4px solid #1E1D26;
+    border-radius: 16px;
+
+    font-size: 25px;
+    line-height: 70px;
+    margin-top: 0.5em;
 }
