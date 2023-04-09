@@ -17,6 +17,7 @@ import Button from "../../../components/Buttons/FormButton";
 import buttonStyle from "../../../components/Buttons/FormButton.module.css";
 import DayContainer from "../../../components/Containers/DayContainer/DayContainer";
 import ButtonContainer from "../../../components/Containers/ButtonContainer/ButtonContainer";
+import WorkerContainer from "../../../components/Containers/WorkerContainer/WorkerContainer";
 
 function LogisticianTrucks() {
 
@@ -26,7 +27,9 @@ function LogisticianTrucks() {
                 <TopBar/>
                 <MidContainer>
                     <CustomContainer className={style.user}>
-
+                        <WorkerContainer workerInfo={" Will Smith\n will@email.com"}
+                                         residence={"Warsaw"}
+                                         truckInfo={"MAN TGS 18.460"}/>
                     </CustomContainer>
                     <CustomContainer className={style.setRoutes}>
                         <div id={style.employee}>

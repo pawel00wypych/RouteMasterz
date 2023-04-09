@@ -11,6 +11,8 @@ import DriverMap from "./views/Driver/Map/DriverMap";
 import Account from "./views/Account/Account";
 import DriverTruck from "./views/Driver/Truck/DriverTruck";
 import LogisticianTrucks from "./views/Logistician/Trucks/LogisticianTrucks";
+import WorkInfo from "./views/Driver/WorkInfo/WorkInfo";
+import Staff from "./views/Logistician/Staff/Staff";
 
 
 const router = createBrowserRouter([
@@ -45,8 +47,18 @@ const router = createBrowserRouter([
         errorElement: <div>404</div>,
     },
     {
+        path: '/driver/workInfo',
+        element: <WorkInfo />,
+        errorElement: <div>404</div>,
+    },
+    {
         path: '/logistician/trucks',
         element: <LogisticianTrucks />,
+        errorElement: <div>404</div>,
+    },
+    {
+        path: '/logistician/staff',
+        element: <Staff />,
         errorElement: <div>404</div>,
     },
 ]);
