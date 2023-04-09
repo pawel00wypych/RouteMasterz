@@ -13,6 +13,7 @@ import DriverTruck from "./views/Driver/Truck/DriverTruck";
 import LogisticianTrucks from "./views/Logistician/Trucks/LogisticianTrucks";
 import WorkInfo from "./views/Driver/WorkInfo/WorkInfo";
 import Staff from "./views/Logistician/Staff/Staff";
+import Admin from "./views/Admin/Admin";
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
     {
         path: '/logistician/staff',
         element: <Staff />,
+        errorElement: <div>404</div>,
+    },
+    {
+        path: '/admin',
+        element: <Admin />,
         errorElement: <div>404</div>,
     },
 ]);
