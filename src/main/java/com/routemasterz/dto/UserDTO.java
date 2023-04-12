@@ -4,7 +4,6 @@ import com.routemasterz.model.Role;
 
 public record UserDTO(
         String email,
-        Role role,
-        Boolean active
+        Role role
 ) {
 }
