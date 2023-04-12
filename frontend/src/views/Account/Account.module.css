@@ -1,0 +1,81 @@
+#emptyDiv {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 51em;
+    width: 39em;
+    padding-right: 0;
+}
+
+#emptyButtonDiv {
+    height: 9.5em;
+    width: 8em;
+
+}
+.user {
+
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    align-content: center;
+    justify-content: center;
+
+    background: #2F2B41;
+    border: 8px solid #1E1D26;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    width: 80em;
+    height: 51em;
+    margin-right: 0.4em;
+}
+
+.logo {
+    width: 24em;
+    height: 24em;
+    margin-left: 6em;
+}
+.photo {
+    width: 14em;
+    height: 14em;
+    margin-right: 3em;
+    margin-left: 3em;
+}
+.userContainer {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    height: 32em;
+}
+
+
+.userInfo {
+
+    box-sizing: border-box;
+    background: #3C3651;
+    border: 3px solid #7878A2;
+    border-radius: 16px;
+
+    width: 56em;
+    height: 24em;
+    color: white;
+    padding: 2em;
+}
+
+.bottomContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+}

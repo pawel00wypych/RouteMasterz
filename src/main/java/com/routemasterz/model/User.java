@@ -55,7 +55,6 @@ public class User {
         this.role = role;
         this.email = email;
         this.password = password;
-        this.active = active;
         this.createdAt = createdAt;
     }
 
@@ -69,7 +68,6 @@ public class User {
         this.role = role;
         this.email = email;
         this.password = password;
-        this.active = active;
         this.createdAt = createdAt;
     }
 
@@ -105,13 +103,6 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 
     public LocalDate getCreatedAt() {
         return createdAt;
@@ -128,7 +119,6 @@ public class User {
                 ", role=" + role +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", active=" + active +
                 ", createdAt=" + createdAt +
                 '}';
     }
