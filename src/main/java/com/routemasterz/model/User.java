@@ -50,12 +50,10 @@ public class User {
     public User( Role role,
                  String email,
                  String password,
-                 Boolean active,
                  LocalDate createdAt) {
         this.role = role;
         this.email = email;
         this.password = password;
-        this.active = active;
         this.createdAt = createdAt;
     }
 
@@ -63,13 +61,11 @@ public class User {
                 Role role,
                 String email,
                 String password,
-                Boolean active,
                 LocalDate createdAt) {
         this.id = id;
         this.role = role;
         this.email = email;
         this.password = password;
-        this.active = active;
         this.createdAt = createdAt;
     }
 
@@ -105,14 +101,6 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -128,7 +116,6 @@ public class User {
                 ", role=" + role +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", active=" + active +
                 ", createdAt=" + createdAt +
                 '}';
     }
