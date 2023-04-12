@@ -1,0 +1,38 @@
+.setDayContainer {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.day{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3em;
+    height: 3em;
+    box-sizing: border-box;
+
+    background: #29243C;
+    border: 3px solid #1E1D26;
+    border-radius: 12px;
+    font-size: 30px;
+    color: white;
+    margin: 0.5em 0.5em 0;
+}
+
+.route {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 13em;
+    height: 3em;
+
+    box-sizing: border-box;
+
+    background: #6A8095;
+    border: 4px solid #1E1D26;
+    border-radius: 16px;
+    font-size: 30px;
+    margin: 0.5em 0.5em 0;
+
+}
