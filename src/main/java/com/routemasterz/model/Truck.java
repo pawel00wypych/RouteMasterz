@@ -7,8 +7,8 @@ import jakarta.persistence.*;
         name = "truck",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "truck_unique",
-                        columnNames = "user_id"
+                        name = "truck_my_user_id_unique",
+                        columnNames = "my_user_id"
                 )
         }
 )
@@ -25,22 +25,48 @@ public class Truck {
             generator = "truck_id_seq"
     )
     private int id;
-    @Column(
-            name="user_id",
-            nullable = false
-    )
-    private int userId;
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name="my_user_id", referencedColumnName = "id")
+    private User userId;
     private String name;
     private int payloadCapacity;
     private String engine;
     private int fuelTank;
     private int fuelUsage;
 
-    public int getUserId() {
+    public Truck() {
+    }
+    public Truck(User userId, String name, int payloadCapacity, String engine, int fuelTank, int fuelUsage) {
+        this.userId = userId;
+        this.name = name;
+        this.payloadCapacity = payloadCapacity;
+        this.engine = engine;
+        this.fuelTank = fuelTank;
+        this.fuelUsage = fuelUsage;
+    }
+    public Truck(int id, User userId, String name, int payloadCapacity, String engine, int fuelTank, int fuelUsage) {
+        this.id = id;
+        this.userId = userId;
+        this.name = name;
+        this.payloadCapacity = payloadCapacity;
+        this.engine = engine;
+        this.fuelTank = fuelTank;
+        this.fuelUsage = fuelUsage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

@@ -21,17 +21,33 @@ public class Schedule {
     )
     private int id;
 
-    @Column(
-            name="user_id",
-            nullable = false
-    )
-    private int userId;
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "my_user_id", referencedColumnName = "id")
+    private User user;
 
-    public int getUserId() {
-        return userId;
+    public Schedule() {
+    }
+    public Schedule(User user) {
+        this.user = user;
+    }
+    public Schedule(int id, User user) {
+        this.id = id;
+        this.user = user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

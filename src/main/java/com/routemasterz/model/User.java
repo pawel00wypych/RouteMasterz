@@ -9,7 +9,7 @@ import java.time.LocalDate;
         name = "my_user",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "customer_email_unique",
+                        name = "my_user_email_unique",
                         columnNames = "email"
                 )
         }
@@ -41,8 +41,10 @@ public class User {
             nullable = false
     )
     private String password;
-
-    private LocalDate createdAt;
+    @Column(
+            nullable = false
+    )
+    private String createdAt;
 
     public User() {
     }
@@ -50,7 +52,7 @@ public class User {
     public User( Role role,
                  String email,
                  String password,
-                 LocalDate createdAt) {
+                 String createdAt) {
         this.role = role;
         this.email = email;
         this.password = password;
@@ -61,7 +63,7 @@ public class User {
                 Role role,
                 String email,
                 String password,
-                LocalDate createdAt) {
+                String createdAt) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -101,11 +103,11 @@ public class User {
         this.password = password;
     }
 
-    public LocalDate getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

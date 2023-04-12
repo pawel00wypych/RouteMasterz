@@ -20,12 +20,40 @@ public class Checkpoint {
     )
     private int id;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "route_id", referencedColumnName = "id")
     private Route route;
     private String location;
-    private int order;
+
+    @Column(
+            name="checkpoint_order"
+    )
+    private int checkpointOrder;
     private String hour;
+
+    public Checkpoint() {
+    }
+    public Checkpoint( Route route, String location, int checkpointOrder, String hour) {
+        this.route = route;
+        this.location = location;
+        this.checkpointOrder = checkpointOrder;
+        this.hour = hour;
+    }
+    public Checkpoint(int id, Route route, String location, int checkpointOrder, String hour) {
+        this.id = id;
+        this.route = route;
+        this.location = location;
+        this.checkpointOrder = checkpointOrder;
+        this.hour = hour;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLocation() {
         return location;
@@ -35,12 +63,12 @@ public class Checkpoint {
         this.location = location;
     }
 
-    public int getOrder() {
-        return order;
+    public int getCheckpointOrder() {
+        return checkpointOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setCheckpointOrder(int checkpointOrder) {
+        this.checkpointOrder = checkpointOrder;
     }
 
     public String getHour() {
@@ -49,5 +77,13 @@ public class Checkpoint {
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

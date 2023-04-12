@@ -4,38 +4,52 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(
-        name = "route"
+        name = "route",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "route_name_unique",
+                        columnNames = "name"
+                )
+        }
 )
 public class Route {
 
     @Id
     @SequenceGenerator(
-            name = "user_details_id_seq",
-            sequenceName = "user_details_id_seq",
+            name = "route_id_seq",
+            sequenceName = "route_id_seq",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_details_id_seq"
+            generator = "route_id_seq"
     )
     private int id;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name="creator_id", referencedColumnName = "id")
+    private User creatorId;
     @Column(
-            name="creator_id",
             nullable = false
     )
-    private int creatorId;
     private String name;
     @Column(
-            name="created_at"
+            name="created_at",
+            nullable = false
     )
     private String createdAt;
 
-    public int getCreatorId() {
-        return creatorId;
+    public Route() {
     }
-
-    public void setCreatorId(int creatorId) {
+    public Route(User creatorId, String name, String createdAt) {
         this.creatorId = creatorId;
+        this.name = name;
+        this.createdAt = createdAt;
+    }
+    public Route(int id, User creatorId, String name, String createdAt) {
+        this.id = id;
+        this.creatorId = creatorId;
+        this.name = name;
+        this.createdAt = createdAt;
     }
 
     public String getName() {
