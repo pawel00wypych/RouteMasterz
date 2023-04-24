@@ -27,7 +27,7 @@ public class Route {
     private int id;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="creator_id", referencedColumnName = "id")
-    private User creatorId;
+    private UserEntity creatorId;
     @Column(
             nullable = false
     )
@@ -40,12 +40,12 @@ public class Route {
 
     public Route() {
     }
-    public Route(User creatorId, String name, String createdAt) {
+    public Route(UserEntity creatorId, String name, String createdAt) {
         this.creatorId = creatorId;
         this.name = name;
         this.createdAt = createdAt;
     }
-    public Route(int id, User creatorId, String name, String createdAt) {
+    public Route(int id, UserEntity creatorId, String name, String createdAt) {
         this.id = id;
         this.creatorId = creatorId;
         this.name = name;

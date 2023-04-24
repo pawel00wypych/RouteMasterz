@@ -12,7 +12,7 @@ import jakarta.persistence.*;
                 )
         }
 )
-public class UserDetails {
+public class UserEntityDetails {
 
     @Id
     @SequenceGenerator(
@@ -27,7 +27,7 @@ public class UserDetails {
     private int id;
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "my_user_id", referencedColumnName = "id")
-    private User user;
+    private UserEntity userEntity;
     @Column(
             nullable = false
     )
@@ -51,11 +51,11 @@ public class UserDetails {
     )
     private String createdAt;
 
-    public UserDetails() {
+    public UserEntityDetails() {
     }
 
-    public UserDetails(
-                       User user,
+    public UserEntityDetails(
+                       UserEntity userEntity,
                        String name,
                        String surname,
                        String residence,
@@ -63,7 +63,7 @@ public class UserDetails {
                        int phoneNumber,
                        String profilePhotoSource,
                        String createdAt) {
-        this.user = user;
+        this.userEntity = userEntity;
         this.name = name;
         this.surname = surname;
         this.residence = residence;
@@ -73,17 +73,17 @@ public class UserDetails {
         this.createdAt = createdAt;
     }
 
-    public UserDetails(int id,
-                       User user,
-                       String name,
-                       String surname,
-                       String residence,
-                       String company,
-                       int phoneNumber,
-                       String profilePhotoSource,
-                       String createdAt) {
+    public UserEntityDetails(int id,
+                             UserEntity userEntity,
+                             String name,
+                             String surname,
+                             String residence,
+                             String company,
+                             int phoneNumber,
+                             String profilePhotoSource,
+                             String createdAt) {
         this.id = id;
-        this.user = user;
+        this.userEntity = userEntity;
         this.name = name;
         this.surname = surname;
         this.residence = residence;
@@ -101,12 +101,12 @@ public class UserDetails {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public String getName() {

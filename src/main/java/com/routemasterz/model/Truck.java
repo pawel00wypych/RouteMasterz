@@ -27,7 +27,7 @@ public class Truck {
     private int id;
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="my_user_id", referencedColumnName = "id")
-    private User userId;
+    private UserEntity userEntityId;
     private String name;
     private int payloadCapacity;
     private String engine;
@@ -36,17 +36,17 @@ public class Truck {
 
     public Truck() {
     }
-    public Truck(User userId, String name, int payloadCapacity, String engine, int fuelTank, int fuelUsage) {
-        this.userId = userId;
+    public Truck(UserEntity userEntityId, String name, int payloadCapacity, String engine, int fuelTank, int fuelUsage) {
+        this.userEntityId = userEntityId;
         this.name = name;
         this.payloadCapacity = payloadCapacity;
         this.engine = engine;
         this.fuelTank = fuelTank;
         this.fuelUsage = fuelUsage;
     }
-    public Truck(int id, User userId, String name, int payloadCapacity, String engine, int fuelTank, int fuelUsage) {
+    public Truck(int id, UserEntity userEntityId, String name, int payloadCapacity, String engine, int fuelTank, int fuelUsage) {
         this.id = id;
-        this.userId = userId;
+        this.userEntityId = userEntityId;
         this.name = name;
         this.payloadCapacity = payloadCapacity;
         this.engine = engine;
@@ -62,12 +62,12 @@ public class Truck {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public UserEntity getUserId() {
+        return userEntityId;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserId(UserEntity userEntityId) {
+        this.userEntityId = userEntityId;
     }
 
     public String getName() {

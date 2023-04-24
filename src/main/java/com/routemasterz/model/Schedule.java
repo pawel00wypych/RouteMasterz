@@ -23,16 +23,16 @@ public class Schedule {
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "my_user_id", referencedColumnName = "id")
-    private User user;
+    private UserEntity userEntity;
 
     public Schedule() {
     }
-    public Schedule(User user) {
-        this.user = user;
+    public Schedule(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
-    public Schedule(int id, User user) {
+    public Schedule(int id, UserEntity userEntity) {
         this.id = id;
-        this.user = user;
+        this.userEntity = userEntity;
     }
 
     public int getId() {
@@ -43,11 +43,11 @@ public class Schedule {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

@@ -81,7 +81,7 @@ VALUES ('Admin'), ('Moderator'), ('User');
 INSERT INTO my_user(id_role, email, password, name, surname, date_of_birth, residence, sex, banned, private, profile_photo_source, background_photo_source, active, creation_date)
 VALUES (1, 'admin@example.com', 'password', 'John', 'Doe', '1980-01-01', 'New York', true, false, false, 'https://example.com/profile.jpg', 'https://example.com/background.jpg', true, now()),
        (2, 'moderator@example.com', 'password', 'Jane', 'Doe', '1990-01-01', 'Los Angeles', false, false, true, 'https://example.com/profile.jpg', 'https://example.com/background.jpg', true, now()),
-       (3, 'user@example.com', 'password', 'Bob', 'Smith', '2000-01-01', 'Chicago', true, false, false, 'https://example.com/profile.jpg', 'https://example.com/background.jpg', true, now());
+       (3, 'userEntity@example.com', 'password', 'Bob', 'Smith', '2000-01-01', 'Chicago', true, false, false, 'https://example.com/profile.jpg', 'https://example.com/background.jpg', true, now());
 
 -- Insert post categories
 INSERT INTO post_category(name)

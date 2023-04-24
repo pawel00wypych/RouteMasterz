@@ -1,8 +1,10 @@
 package com.routemasterz.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 @Table(
@@ -14,7 +16,7 @@ import java.time.LocalDate;
                 )
         }
 )
-public class User {
+public class UserEntity implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -46,24 +48,24 @@ public class User {
     )
     private String createdAt;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User( Role role,
-                 String email,
-                 String password,
-                 String createdAt) {
+    public UserEntity(Role role,
+                      String email,
+                      String password,
+                      String createdAt) {
         this.role = role;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
     }
 
-    public User(long id,
-                Role role,
-                String email,
-                String password,
-                String createdAt) {
+    public UserEntity(long id,
+                      Role role,
+                      String email,
+                      String password,
+                      String createdAt) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -95,8 +97,38 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
