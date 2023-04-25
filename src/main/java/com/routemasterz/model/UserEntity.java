@@ -19,14 +19,8 @@ import java.util.Collection;
 public class UserEntity implements UserDetails {
 
     @Id
-    @SequenceGenerator(
-            name = "my_user_id_seq",
-            sequenceName = "my_user_id_seq",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "my_user_id_seq"
+            strategy = GenerationType.IDENTITY
     )
     private long id;
 
@@ -48,17 +42,22 @@ public class UserEntity implements UserDetails {
     )
     private String createdAt;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UserEntityDetails userEntityDetails;
+
     public UserEntity() {
     }
 
     public UserEntity(Role role,
                       String email,
                       String password,
-                      String createdAt) {
+                      String createdAt,
+                      UserEntityDetails userEntityDetails) {
         this.role = role;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
+        this.userEntityDetails = userEntityDetails;
     }
 
     public UserEntity(long id,

@@ -4,29 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(
-        name = "user_details",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "my_user_id_unique",
-                        columnNames = "my_user_id"
-                )
-        }
+        name = "user_details"
 )
 public class UserEntityDetails {
 
     @Id
-    @SequenceGenerator(
-            name = "user_details_id_seq",
-            sequenceName = "user_details_id_seq",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_details_id_seq"
+            strategy = GenerationType.IDENTITY
     )
     private int id;
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "my_user_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "userEntityDetails",fetch = FetchType.EAGER)
     private UserEntity userEntity;
     @Column(
             nullable = false
@@ -36,26 +23,19 @@ public class UserEntityDetails {
             nullable = false
     )
     private String surname;
-    @Column(
-            nullable = false
-    )
     private String residence;
-    @Column(
-            nullable = false
-    )
     private String company;
+    @Column(name = "phone_number")
     private int phoneNumber;
+    @Column(name = "profile_photo")
     private String profilePhotoSource;
-    @Column(
-            nullable = false
-    )
+    @Column(name = "created_at")
     private String createdAt;
 
     public UserEntityDetails() {
     }
 
     public UserEntityDetails(
-                       UserEntity userEntity,
                        String name,
                        String surname,
                        String residence,
@@ -63,7 +43,6 @@ public class UserEntityDetails {
                        int phoneNumber,
                        String profilePhotoSource,
                        String createdAt) {
-        this.userEntity = userEntity;
         this.name = name;
         this.surname = surname;
         this.residence = residence;
@@ -74,7 +53,6 @@ public class UserEntityDetails {
     }
 
     public UserEntityDetails(int id,
-                             UserEntity userEntity,
                              String name,
                              String surname,
                              String residence,
@@ -83,7 +61,6 @@ public class UserEntityDetails {
                              String profilePhotoSource,
                              String createdAt) {
         this.id = id;
-        this.userEntity = userEntity;
         this.name = name;
         this.surname = surname;
         this.residence = residence;
@@ -96,6 +73,7 @@ public class UserEntityDetails {
     public int getId() {
         return id;
     }
+
 
     public void setId(int id) {
         this.id = id;

@@ -18,15 +18,8 @@ public class BlackListJWToken {
 
 
     @Id
-    @SequenceGenerator(
-            name = "black_token_id_seq",
-            sequenceName = "black_token_id_seq",
-            allocationSize = 1,
-            initialValue = 0
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "black_token_id_seq"
+            strategy = GenerationType.IDENTITY
     )
     private Long id;
 

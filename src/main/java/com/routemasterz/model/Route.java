@@ -4,30 +4,15 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(
-        name = "route",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "route_name_unique",
-                        columnNames = "name"
-                )
-        }
+        name = "route"
 )
 public class Route {
 
     @Id
-    @SequenceGenerator(
-            name = "route_id_seq",
-            sequenceName = "route_id_seq",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "route_id_seq"
+            strategy = GenerationType.IDENTITY
     )
     private int id;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name="creator_id", referencedColumnName = "id")
-    private UserEntity creatorId;
     @Column(
             nullable = false
     )
@@ -40,14 +25,12 @@ public class Route {
 
     public Route() {
     }
-    public Route(UserEntity creatorId, String name, String createdAt) {
-        this.creatorId = creatorId;
+    public Route(String name, String createdAt) {
         this.name = name;
         this.createdAt = createdAt;
     }
-    public Route(int id, UserEntity creatorId, String name, String createdAt) {
+    public Route(int id, String name, String createdAt) {
         this.id = id;
-        this.creatorId = creatorId;
         this.name = name;
         this.createdAt = createdAt;
     }
