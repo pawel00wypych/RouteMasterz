@@ -9,14 +9,8 @@ import jakarta.persistence.*;
 public class Checkpoint {
 
     @Id
-    @SequenceGenerator(
-            name = "checkpoint_id_seq",
-            sequenceName = "checkpoint_id_seq",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "checkpoint_id_seq"
+            strategy = GenerationType.IDENTITY
     )
     private int id;
 

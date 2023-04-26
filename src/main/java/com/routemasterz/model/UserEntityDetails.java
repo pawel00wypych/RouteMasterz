@@ -4,30 +4,17 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(
-        name = "user_details",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "my_user_id_unique",
-                        columnNames = "my_user_id"
-                )
-        }
+        name = "user_details"
 )
-public class UserDetails {
+public class UserEntityDetails {
 
     @Id
-    @SequenceGenerator(
-            name = "user_details_id_seq",
-            sequenceName = "user_details_id_seq",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_details_id_seq"
+            strategy = GenerationType.IDENTITY
     )
     private int id;
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "my_user_id", referencedColumnName = "id")
-    private User user;
+    @OneToOne(mappedBy = "userEntityDetails",fetch = FetchType.EAGER)
+    private UserEntity userEntity;
     @Column(
             nullable = false
     )
@@ -36,26 +23,19 @@ public class UserDetails {
             nullable = false
     )
     private String surname;
-    @Column(
-            nullable = false
-    )
     private String residence;
-    @Column(
-            nullable = false
-    )
     private String company;
+    @Column(name = "phone_number")
     private int phoneNumber;
+    @Column(name = "profile_photo")
     private String profilePhotoSource;
-    @Column(
-            nullable = false
-    )
+    @Column(name = "created_at")
     private String createdAt;
 
-    public UserDetails() {
+    public UserEntityDetails() {
     }
 
-    public UserDetails(
-                       User user,
+    public UserEntityDetails(
                        String name,
                        String surname,
                        String residence,
@@ -63,7 +43,6 @@ public class UserDetails {
                        int phoneNumber,
                        String profilePhotoSource,
                        String createdAt) {
-        this.user = user;
         this.name = name;
         this.surname = surname;
         this.residence = residence;
@@ -73,17 +52,15 @@ public class UserDetails {
         this.createdAt = createdAt;
     }
 
-    public UserDetails(int id,
-                       User user,
-                       String name,
-                       String surname,
-                       String residence,
-                       String company,
-                       int phoneNumber,
-                       String profilePhotoSource,
-                       String createdAt) {
+    public UserEntityDetails(int id,
+                             String name,
+                             String surname,
+                             String residence,
+                             String company,
+                             int phoneNumber,
+                             String profilePhotoSource,
+                             String createdAt) {
         this.id = id;
-        this.user = user;
         this.name = name;
         this.surname = surname;
         this.residence = residence;
@@ -97,16 +74,17 @@ public class UserDetails {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public String getName() {

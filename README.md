@@ -14,4 +14,4 @@ Logistic application to plan routes for drivers.
 - run "docker-compose up" in project folder
 
 ## Database ERD
-![routeMasterz](https://user-images.githubusercontent.com/92308173/225300140-804b08db-9162-487c-8540-8dddde401c56.png)
+![routeMasterz](https://userEntity-images.githubusercontent.com/92308173/225300140-804b08db-9162-487c-8540-8dddde401c56.png)
