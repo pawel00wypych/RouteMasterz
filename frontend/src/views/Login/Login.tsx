@@ -17,32 +17,50 @@ import TitleContainer from "../../components/Containers/TitleContainer/TitleCont
 import buttonStyle from "../../components/Buttons/FormButton.module.css"
 // @ts-ignore
 import style from './Login.module.css';
-import {Link} from "react-router-dom";
+import { login as apiLogin } from '../../auth';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 // @ts-ignore
 import inputStyle from '../../components/FormInput/FormInput.module.css';
+
 function Login() {
+    const email = useRef<HTMLInputElement>(null);
+    const password = useRef<HTMLInputElement>(null);
 
-    return (
-        <Page>
-            <img src={logo} className={pageStyle.logo} alt={'RouteMasterz'}/>
+    const navigate = useNavigate();
 
-            <FormContainer>
-                <TitleContainer>
-                    Login
-                </TitleContainer>
-                <Input className={inputStyle.input} text="email@example.com" />
-                <Input className={inputStyle.input} text="password" />
-                <div id={style.emptyDiv}></div>
+    async function sendLoginRequest() {
+        if (!password.current?.value || !email.current?.value)
+            return;
+        else {
+            const resp = await apiLogin(email.current?.value, password.current?.value, navigate);
+            if (resp !== undefined) alert(`Error: ${resp}`);
+        }
+    }
 
-                <ButtonContainer>
-                    <Button className={buttonStyle.formButton}  src={signIn} iconHeight={"60px"} iconWidth={"60px"}/>
-                    <Link to='/register'>
-                        <Button className={buttonStyle.formButton} text="Register" />
-                    </Link>
-                </ButtonContainer>
-            </FormContainer>
-        </Page>
-    );
+        return (
+            <Page>
+                <img src={logo} className={pageStyle.logo} alt={'RouteMasterz'}/>
+
+                <FormContainer>
+                    <TitleContainer>
+                        Login
+                    </TitleContainer>
+                    <Input useRef={email} className={inputStyle.input} text="email@example.com"/>
+                    <Input useRef={password} className={inputStyle.input} text="password"/>
+                    <div id={style.emptyDiv}></div>
+
+                    <ButtonContainer>
+                        <Button className={buttonStyle.formButton} onClick={sendLoginRequest} src={signIn}
+                                iconHeight={"60px"} iconWidth={"60px"}/>
+                        <Link to='/register'>
+                            <Button className={buttonStyle.formButton} text="Register"/>
+                        </Link>
+                    </ButtonContainer>
+                </FormContainer>
+            </Page>
+        );
+
 }
 
 export default Login;
