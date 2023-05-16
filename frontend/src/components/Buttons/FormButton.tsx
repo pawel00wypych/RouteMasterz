@@ -10,7 +10,7 @@ export interface InputProps {
     height?: string;
     iconHeight?: string;
     iconWidth?: string;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     className?: string;
     id?: string;
 }
@@ -23,8 +23,12 @@ export default class Button extends Component<InputProps> {
     };
     render() {
         return (
-            <button className={[this.props.className].join(' ')} onClick={this.props.onClick} id={this.props.id}>
-                <Icon src={this.props.src} width={this.props.iconWidth} height={this.props.iconHeight}/>
+            <button className={[this.props.className].join(' ')}
+                    onClick={this.props.onClick}
+                    id={this.props.id}>
+                <Icon src={this.props.src}
+                      width={this.props.iconWidth}
+                      height={this.props.iconHeight}/>
                 {this.props.text}
             </button>
 
