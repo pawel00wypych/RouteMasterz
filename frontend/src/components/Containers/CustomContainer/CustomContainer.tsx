@@ -5,6 +5,7 @@ export interface FormContainerProps extends HTMLAttributes<HTMLDivElement> {
     width?: string,
     height?: string,
     className?: string;
+    key?: number;
 }
 
 class CustomContainer extends Component<FormContainerProps> {

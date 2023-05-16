@@ -16,6 +16,8 @@ import buttonStyle from "../../../components/Buttons/FormButton.module.css"
 import save from "../../../resources/img/save.svg";
 // @ts-ignore
 import add from "../../../resources/img/plus.svg";
+// @ts-ignore
+import del from "../../../resources/img/delete.svg";
 import Map from "../../Map/Map";
 import MainContainer from "../../../components/Containers/MainContainer/MainContainer";
 import TopBar from "../../../components/TopBar/TopBar";
@@ -23,15 +25,34 @@ import MidContainer from "../../../components/Containers/MidContainer/MidContain
 import Page from "../../../components/Page/Page";
 // @ts-ignore
 import { geosearch } from 'leaflet-geosearch';
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import {useLinkedList} from "../../../components/LinkedList";
 
 function LogisticianMap() {
+
     const [coords, setCorrds] = useState({
         latitude: 39.7837304,
         longitude: -100.4458825
     });
 
+    //used to reload chosen component
+    const [seed, setSeed] = useState(1);
+    const reset = () => {
+        setSeed(Math.random());
+    }
+
+    const [routeName, setRouteName] = useState("");
+
     const [display_name, setName] = useState("");
+
+    const [lastAdded, setLastAdded] = useState<{ [key: string]: string }>({
+        country: '',
+        street: '',
+        city: '',
+        state: '',
+        postalcode: '',
+        hour: '',
+    });
 
     const [address, setAddress] = useState<{ [key: string]: string }>({
         country: '',
@@ -41,6 +62,10 @@ function LogisticianMap() {
         postalcode: '',
         hour: '',
     });
+    const [checkpoints, setCheckpoints] = useState<{ [key: string]: string }[]>([]);
+
+    const {insert, remove, toArray} = useLinkedList<typeof address>();
+
 
     function error() {
         alert('Sorry, no position available.');
@@ -129,17 +154,31 @@ function LogisticianMap() {
         };
     }
 
-    function submitHandler(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function updateName() {
+        return (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.currentTarget.value;
+            setRouteName(value);
+        };
+    }
 
+    function removeLastCheckpoint(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        console.log("remove");
         e.preventDefault();
-        console.log(address);
+        remove(lastAdded);
+        const checkpoints = toArray();
+        setCheckpoints(checkpoints);
+        setLastAdded(checkpoints[checkpoints.length - 1]);
+        reset();
+    }
 
+    function addCheckpoint(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
         let url = `https://nominatim.openstreetmap.org/search?
-    street=${address.street}
-    &city=${address.city}
-    &state=${address.state}
-    &country=${address.country}
-    &postalcode=${address.postalcode}&format=json`;
+                    street=${address.street}
+                    &city=${address.city}
+                    &state=${address.state}
+                    &country=${address.country}
+                    &postalcode=${address.postalcode}&format=json`;
 
         fetch(url, {
             method: "POST",
@@ -161,11 +200,72 @@ function LogisticianMap() {
                         latitude: data[0].lat,
                         longitude: data[0].lon
                     });
+                    insert(address);
+                    const checkpoints = toArray();
+                    console.log(checkpoints);
+                    setCheckpoints(checkpoints);
+                    setLastAdded(address);
                 }
 
             ).catch((error) => {
             alert("Error in your input; unable to find the position");
+            return;
         });
+
+
+        setAddress({
+            country: '',
+            street: '',
+            city: '',
+            state: '',
+            postalcode: '',
+            hour: ''
+        });
+        reset();
+    }
+
+    function submitHandler(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+
+        const data = {
+            checkpoints: toArray(),
+            routeName: routeName,
+        };
+
+        console.log(data);
+        const jsonData = JSON.stringify(data);
+        console.log(jsonData);
+
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        fetch('/your-api-endpoint', {
+            method: 'POST',
+            headers: headers,
+            body: jsonData,
+        })
+            .then((response) => {
+                if (response.ok) {
+                    setCheckpoints([]);
+                    setRouteName('');
+                    setAddress({
+                        country: '',
+                        street: '',
+                        city: '',
+                        state: '',
+                        postalcode: '',
+                        hour: ''
+                    });
+                    reset();
+                } else {
+                    throw new Error('save route error ' + error.valueOf());
+                }
+            })
+            .catch((error) => {
+                throw new Error(error.valueOf());
+            });
+
     }
 
     return (
@@ -176,7 +276,7 @@ function LogisticianMap() {
                     <Map coords={coords}
                          display_name={display_name}
                          onDataReceived={handleDataReceived}/>
-                    <CustomContainer className={style.mapRightPulpit}>
+                    <CustomContainer key={seed} className={style.mapRightPulpit}>
                         <FormInput className={inputStyle.mapSearch}
                                    text={address.country ? address.country :"Country"}
                                    value={address.country}
@@ -193,7 +293,6 @@ function LogisticianMap() {
                                        text={address.postalcode ? address.postalcode :"Zip Code"}
                                        value={address.postalcode}
                                        onChange={update("postalcode")}></FormInput>
-
                         <CustomContainer className={style.addedPoints}>
                             <CustomContainer className={style.addPoint}>
                                 <FormInput className={inputStyle.chooseHour}
@@ -204,14 +303,32 @@ function LogisticianMap() {
                                         src={add}
                                         iconHeight={"40px"}
                                         iconWidth={"40px"}
-                                        onClick={(e) => submitHandler(e)}/>
+                                        onClick={(e) => addCheckpoint(e)}/>
+                                <Button className={buttonStyle.addPoint}
+                                        src={del}
+                                        iconHeight={"40px"}
+                                        iconWidth={"40px"}
+                                        onClick={(e) => removeLastCheckpoint(e)}/>
                             </CustomContainer>
+                            <div className={style.addedCheckpoints}>
+                                <ul>
+                                    {toArray().map((checkpoint, index) => (
+                                        <li key={index}>
+                                            Country: {checkpoint.country}, Street: {checkpoint.street}, City: {checkpoint.city}, State: {checkpoint.state}, Postal Code: {checkpoint.postalcode}, Hour: {checkpoint.hour}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </CustomContainer>
-                        <FormInput className={inputStyle.mapSearch} text={"route name"}></FormInput>
+                        <FormInput className={inputStyle.mapSearch}
+                                   text={routeName? routeName:"route name"}
+                                   value={routeName}
+                                   onChange={updateName()} ></FormInput>
                         <Button className={buttonStyle.saveRouteButton}
                                 src={save}
                                 iconHeight={"60px"}
-                                iconWidth={"60px"}/>
+                                iconWidth={"60px"}
+                                onClick={(e) => submitHandler(e)}/>
                     </CustomContainer>
                 </MidContainer>
             </MainContainer>
