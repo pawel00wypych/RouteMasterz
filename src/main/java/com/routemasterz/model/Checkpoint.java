@@ -14,31 +14,46 @@ public class Checkpoint {
     )
     private int id;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "route_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id")
     private Route route;
-    private String location;
+
+    private String country;
+    private String street;
+    private String city;
+    private String state;
+    private String postalcode;
+    private String hour;
 
     @Column(
             name="checkpoint_order"
     )
     private int checkpointOrder;
-    private String hour;
 
     public Checkpoint() {
     }
-    public Checkpoint( Route route, String location, int checkpointOrder, String hour) {
-        this.route = route;
-        this.location = location;
-        this.checkpointOrder = checkpointOrder;
-        this.hour = hour;
-    }
-    public Checkpoint(int id, Route route, String location, int checkpointOrder, String hour) {
+
+    public Checkpoint(int id, Route route, String country, String street, String city, String state, String postalcode, String hour, int checkpointOrder) {
         this.id = id;
         this.route = route;
-        this.location = location;
-        this.checkpointOrder = checkpointOrder;
+        this.country = country;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.postalcode = postalcode;
         this.hour = hour;
+        this.checkpointOrder = checkpointOrder;
+    }
+
+    public Checkpoint(Route route, String country, String street, String city, String state, String postalcode, String hour, int checkpointOrder) {
+        this.route = route;
+        this.country = country;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.postalcode = postalcode;
+        this.hour = hour;
+        this.checkpointOrder = checkpointOrder;
     }
 
     public int getId() {
@@ -49,12 +64,44 @@ public class Checkpoint {
         this.id = id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCountry() {
+        return country;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPostalcode() {
+        return postalcode;
+    }
+
+    public void setPostalcode(String postalcode) {
+        this.postalcode = postalcode;
     }
 
     public int getCheckpointOrder() {

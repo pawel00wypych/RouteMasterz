@@ -1,6 +1,5 @@
 package com.routemasterz.repository;
 
-import com.routemasterz.model.UserEntity;
 import com.routemasterz.model.UserEntityDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

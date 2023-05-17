@@ -286,6 +286,10 @@ function LogisticianMap() {
                                    value={address.street}
                                    onChange={update("street")}></FormInput>
                         <FormInput className={inputStyle.mapSearch}
+                                   text={address.state ? address.state :"State"}
+                                   value={address.state}
+                                   onChange={update("state")}></FormInput>
+                        <FormInput className={inputStyle.mapSearch}
                                        text={address.city ? address.city :"City"}
                                        value={address.city}
                                        onChange={update("city")}></FormInput>
