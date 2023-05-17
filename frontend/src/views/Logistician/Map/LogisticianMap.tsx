@@ -27,6 +27,7 @@ import Page from "../../../components/Page/Page";
 import { geosearch } from 'leaflet-geosearch';
 import { useEffect, useState} from "react";
 import {useLinkedList} from "../../../components/LinkedList";
+const saveRoutefetchUrl = `${process.env.REACT_APP_BACKEND_URL}/logistician/map/saveRoute`;
 
 function LogisticianMap() {
 
@@ -171,6 +172,16 @@ function LogisticianMap() {
         reset();
     }
 
+    function removeAllCheckpoints() {
+        let current = toArray().length - 1;
+        while (current >= 0) {
+            remove(toArray()[current]);
+            current--;
+        }
+        setCheckpoints([]);
+        setLastAdded({});
+    }
+
     function addCheckpoint(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
         let url = `https://nominatim.openstreetmap.org/search?
@@ -237,17 +248,19 @@ function LogisticianMap() {
         console.log(jsonData);
 
         const headers = {
+            'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true'
         };
 
-        fetch('/your-api-endpoint', {
+        fetch(saveRoutefetchUrl, {
             method: 'POST',
             headers: headers,
             body: jsonData,
         })
             .then((response) => {
                 if (response.ok) {
-                    setCheckpoints([]);
                     setRouteName('');
                     setAddress({
                         country: '',
@@ -257,7 +270,9 @@ function LogisticianMap() {
                         postalcode: '',
                         hour: ''
                     });
+                    removeAllCheckpoints();
                     reset();
+                    console.log("save route success");
                 } else {
                     throw new Error('save route error ' + error.valueOf());
                 }
@@ -265,7 +280,7 @@ function LogisticianMap() {
             .catch((error) => {
                 throw new Error(error.valueOf());
             });
-
+        reset();
     }
 
     return (
