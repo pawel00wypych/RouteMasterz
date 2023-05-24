@@ -19,18 +19,8 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @GetMapping(path = "/driver/map")
-    public String showDriverMap() {
-        return null;
-    }
-
     @GetMapping(path = "/driver/map/routes")
     public String showDriverRoutes() {
-        return null;
-    }
-
-    @GetMapping(path = "/logistician/map")
-    public String showLogisticianMap() {
         return null;
     }
 

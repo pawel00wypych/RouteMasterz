@@ -43,12 +43,12 @@ const router = createBrowserRouter([
         errorElement: <div>404</div>,
     },
     {
-        path: '/driver/truck',
+        path: '/driver/trucks',
         element: <DriverTruck />,
         errorElement: <div>404</div>,
     },
     {
-        path: '/driver/workInfo',
+        path: '/driver/staff',
         element: <WorkInfo />,
         errorElement: <div>404</div>,
     },
