@@ -29,7 +29,7 @@ export class InvalidSessionError extends Error {
 }
 
 export const removeSesionData = () => {
-    sessionStorage.removeItem('USERSTATE');
+    sessionStorage.removeItem('userToken');
 };
 
 export const logout = async () => {
@@ -93,18 +93,12 @@ export const setUserState = (username: string, role: Role): void => {
 };
 
 export const isLoggedIn = (): boolean => {
-    const userState = getUserstate();
-    if (userState === null) return false;
-
-    const now = new Date();
-    const diff = now.getTime() - userState.sessionStart.getTime();
-
-    if (diff > 1000 * 60 * 120) {
-        removeSesionData();
+    if (sessionStorage.getItem("userToken") !== undefined
+        && sessionStorage.getItem("userToken") != 'undefined'
+        && sessionStorage.getItem("userToken"))
+        return true;
+    else
         return false;
-    }
-
-    return true;
 };
 
 export const isAdmin = (): boolean => {
@@ -166,7 +160,7 @@ export const fetchUser = async (): Promise<User | null> => {
     };
 
     try {
-        const resp = await fetch(/*fetchUserUrl*/ "/account", requestOptions);
+        const resp = await fetch(fetchUserUrl, requestOptions);
         if (resp.status !== 200) return null;
 
         const user = await resp.json();

@@ -14,7 +14,8 @@ import LogisticianTrucks from "./views/Logistician/Trucks/LogisticianTrucks";
 import WorkInfo from "./views/Driver/WorkInfo/WorkInfo";
 import Staff from "./views/Logistician/Staff/Staff";
 import Admin from "./views/Admin/Admin";
-
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import { isLoggedIn } from './auth';
 
 const router = createBrowserRouter([
     {
@@ -29,42 +30,81 @@ const router = createBrowserRouter([
     },
     {
         path: '/logistician/map',
-        element: <LogisticianMap />,
+        element: <RestrictedRoute
+            condition={isLoggedIn}
+            component={<LogisticianMap/>}
+            invalidComponent={<Login/>}
+        />,
         errorElement: <div>404</div>,
     },
     {
         path: '/driver/map',
-        element: <DriverMap />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<DriverMap/>}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
     {
         path: '/account',
-        element: <Account />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<Account/>}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
     {
         path: '/driver/trucks',
-        element: <DriverTruck />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<DriverTruck/>}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
     {
         path: '/driver/staff',
-        element: <WorkInfo />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<WorkInfo />}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
     {
         path: '/logistician/trucks',
-        element: <LogisticianTrucks />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<LogisticianTrucks/>}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
     {
         path: '/logistician/staff',
-        element: <Staff />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<Staff />}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
     {
         path: '/admin',
-        element: <Admin />,
+        element:
+            <RestrictedRoute
+                condition={isLoggedIn}
+                component={<Admin />}
+                invalidComponent={<Login/>}
+            />,
         errorElement: <div>404</div>,
     },
 ]);
