@@ -1,4 +1,4 @@
-import { Component, createRef, RefObject } from 'react';
+import {ChangeEvent, Component, createRef, RefObject} from 'react';
 
 // @ts-ignore
 import style from './FormInput.module.css';
@@ -13,6 +13,7 @@ export interface FormInputProps {
     id?: string;
     useRef?: RefObject<HTMLInputElement>;
     value?: string;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 
 }
 export interface InputState {
@@ -35,7 +36,14 @@ export default class FormInput extends Component<FormInputProps, InputState> {
 
     render() {
         return (
-            <input height={this.props.height} width={this.props.width} ref={this.props.useRef} placeholder={this.props.text} className={this.props.className} onClick={this.props.onClick} type='text' id={this.props.id} />
+            <input height={this.props.height}
+                   width={this.props.width}
+                   ref={this.props.useRef}
+                   placeholder={this.props.text}
+                   className={this.props.className}
+                   onClick={this.props.onClick}
+                   type='text' id={this.props.id}
+                   onChange={this.props.onChange}/>
         );
     }
 }
