@@ -18,8 +18,8 @@ import truck from "../../resources/img/truck.svg";
 // @ts-ignore
 import user from "../../resources/img/human.svg";
 // @ts-ignore
-import logout from "../../resources/img/logout.svg";
-
+import logoutIcon from "../../resources/img/logout.svg";
+import { logout, getUserstate, Role} from "../../auth";
 
 export interface TopBarProps {
     className?: string;
@@ -36,49 +36,64 @@ interface PageProps {
     children?: HTMLAttributes<HTMLDivElement>['children'];
 }
 
-export default class TopBar extends Component<TopBarProps, TopBarState> {
-    private static defaultProps: PageProps = {
-        title: '',
-        background: false,
-        contentClassName: '',
-    };
+function createURL(role: Role | undefined, dest: string): string {
+    switch (role) {
+        case Role.ADMIN:
+            return "/admin";
+        case Role.DRIVER:
+            return "/driver/"+dest;
+        case Role.LOGISTICIAN:
+            return "/logistician/"+dest;
+        default:
+            return "/";
+    }
 
-    render() {
-        return (
-            <TopBarContainer className={topBarContainerStyle}>
-                <NavLink to='/'>
+}
+
+    export default class TopBar extends Component<TopBarProps, TopBarState> {
+        private static defaultProps: PageProps = {
+            title: '',
+            background: false,
+            contentClassName: '',
+        };
+
+        render() {
+            return (
+                <TopBarContainer className={topBarContainerStyle}>
                     <Button className={buttonStyle.topBarButton}
-                            src={pin}
-                            iconHeight={"60px"}
-                            iconWidth={"60px"}/>
-                </NavLink>
-                <NavLink to='/'>
+                                src={pin}
+                                iconHeight={"60px"}
+                                iconWidth={"60px"}
+                                onClick={() => { window.location.replace(createURL(getUserstate()?.role, "/map"))}}
+                               />
                     <Button className={buttonStyle.topBarButton}
-                            src={list}
-                            iconHeight={"60px"}
-                            iconWidth={"60px"}/>
-                </NavLink>
-                <NavLink to='/'>
+                                src={list}
+                                iconHeight={"60px"}
+                                iconWidth={"60px"}
+                                onClick={() => { window.location.replace(createURL(getUserstate()?.role, "/staff"))}}
+                            />
                     <Button className={buttonStyle.topBarButton}
                             src={truck}
                             iconHeight={"60px"}
-                            iconWidth={"60px"}/>
-                </NavLink>
-                <div id={style.emptyDiv}/>
-                <NavLink to='/'>
-                    <Button className={buttonStyle.topBarButton}
-                            src={user}
-                            iconHeight={"60px"}
-                            iconWidth={"60px"}/>
-                </NavLink>
-                <NavLink to='/'>
-                    <Button className={buttonStyle.topBarButton}
-                            src={logout}
-                            iconHeight={"60px"}
-                            iconWidth={"60px"}/>
-                </NavLink>
-            </TopBarContainer>
+                            iconWidth={"60px"}
+                            onClick={() => { window.location.replace(createURL(getUserstate()?.role, "/trucks"))}}
+                            />
+                    <div id={style.emptyDiv}/>
+                    <NavLink to='/account'>
+                        <Button className={buttonStyle.topBarButton}
+                                src={user}
+                                iconHeight={"60px"}
+                                iconWidth={"60px"}/>
+                    </NavLink>
+                    <NavLink to='/'>
+                        <Button className={buttonStyle.topBarButton}
+                                src={logoutIcon}
+                                iconHeight={"60px"}
+                                iconWidth={"60px"}
+                                onClick={logout}/>
+                    </NavLink>
+                </TopBarContainer>
 
-        );
+            );
+        }
     }
-}

@@ -1,6 +1,9 @@
 package com.routemasterz.model;
 
 import jakarta.persistence.*;
+import com.routemasterz.model.Checkpoint;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -14,7 +17,8 @@ public class Route {
     )
     private int id;
     @Column(
-            nullable = false
+            nullable = false,
+            unique = true
     )
     private String name;
     @Column(
@@ -22,6 +26,10 @@ public class Route {
             nullable = false
     )
     private String createdAt;
+
+
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Checkpoint> checkpoints;
 
     public Route() {
     }

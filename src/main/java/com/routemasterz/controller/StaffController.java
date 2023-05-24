@@ -1,7 +1,7 @@
 package com.routemasterz.controller;
 
 import com.routemasterz.dto.DeleteRouteRequest;
-import com.routemasterz.dto.ShowStaffRequest;
+import com.routemasterz.dto.ShowRoutesRequest;
 import com.routemasterz.dto.UserRoleRequest;
 import com.routemasterz.service.StaffService;
 import org.springframework.http.MediaType;
@@ -32,9 +32,9 @@ public class StaffController {
         return null;
     }
 
-    @GetMapping(path = "/logistician/showStaff",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String showStaff(@RequestBody ShowStaffRequest request) {
-        return staffService.showStaff(request);
+    @GetMapping(path = "/logistician/showRoutes",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public String showRoutes(@RequestBody ShowRoutesRequest request) {
+        return staffService.showRoutes(request);
     }
 
     @PostMapping(path = "/logistician/deleteRoute",  produces = MediaType.APPLICATION_JSON_VALUE)

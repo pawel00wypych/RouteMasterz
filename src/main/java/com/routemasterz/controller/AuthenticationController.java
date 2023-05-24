@@ -17,24 +17,12 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE, path="login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         return authenticationService.login(request);
     }
-
-    @GetMapping( path="login")
-    public String showLoginPage() {
-        return "login page";
-    }
-
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE, path="register")
     public  ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         return authenticationService.register(request);
-    }
-
-    @GetMapping(path="register")
-    public String showRegisterPage() {
-        return null;
     }
 }
