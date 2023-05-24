@@ -1,7 +1,7 @@
 package com.routemasterz.service;
 
 import com.routemasterz.dto.DeleteRouteRequest;
-import com.routemasterz.dto.ShowStaffRequest;
+import com.routemasterz.dto.ShowRoutesRequest;
 import com.routemasterz.dto.UserRoleRequest;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ public class StaffService {
         return "role changed";
     }
 
-    public String showStaff(ShowStaffRequest request) {
+    public String showRoutes(ShowRoutesRequest request) {
         return "staff";
     }
 

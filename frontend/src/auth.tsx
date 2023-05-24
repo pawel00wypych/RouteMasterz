@@ -11,7 +11,7 @@ interface UserState {
     role: Role;
 }
 
-enum Role {
+export enum Role {
     ADMIN,
     DRIVER,
     LOGISTICIAN,

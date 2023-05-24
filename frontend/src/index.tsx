@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         errorElement: <div>404</div>,
     },
     {
-        path: '/driver/truck',
+        path: '/driver/trucks',
         element:
             <RestrictedRoute
                 condition={isLoggedIn}
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
         errorElement: <div>404</div>,
     },
     {
-        path: '/driver/workInfo',
+        path: '/driver/staff',
         element:
             <RestrictedRoute
                 condition={isLoggedIn}

@@ -4,6 +4,7 @@ import com.routemasterz.dto.SaveRouteRequest;
 import com.routemasterz.dto.SetPlaceRequest;
 import com.routemasterz.service.MapService;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,18 +19,8 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @GetMapping(path = "/driver/map")
-    public String showDriverMap() {
-        return null;
-    }
-
     @GetMapping(path = "/driver/map/routes")
     public String showDriverRoutes() {
-        return null;
-    }
-
-    @GetMapping(path = "/logistician/map")
-    public String showLogisticianMap() {
         return null;
     }
 
@@ -39,7 +30,7 @@ public class MapController {
     }
 
     @PostMapping(path = "/logistician/map/saveRoute",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String saveRoute(@RequestBody SaveRouteRequest request) {
+    public ResponseEntity<?> saveRoute(@RequestBody SaveRouteRequest request) {
         return mapService.saveRoute(request);
     }
 

@@ -90,7 +90,7 @@ public class AuthenticationService {
         );
 
         UserEntity userEntity = new UserEntity(
-                Role.DRIVER,
+                Role.LOGISTICIAN,
                 request.email(),
                 passwordEncoder.encode(request.password()),
                 LocalDate.now().toString(),
