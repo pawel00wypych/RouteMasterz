@@ -16,7 +16,12 @@ public class UserEntityDataAccessService implements UserDetailsDAO{
     }
 
     @Override
-    public Optional<UserEntityDetails> findUserInfoByEmail(String email) {
-        return Optional.ofNullable(repository.findUserEntityDetailsByEmail(email));
+    public UserEntityDetails findUserInfoByEmail(String email) {
+        return repository.findUserEntityDetailsByEmail(email);
+    }
+
+    @Override
+    public void setNewPhone(Long id, int phoneNumber) {
+        repository.setNewPhone(id, phoneNumber);
     }
 }
