@@ -27,4 +27,9 @@ public class UserJPADataAccessService implements UserDAO{
     public void save(UserEntity userEntity) {
         userRepository.save(userEntity);
     }
+
+    @Override
+    public void setNewPassword(long id, String password) {
+        userRepository.setNewPassword(id, password);
+    }
 }

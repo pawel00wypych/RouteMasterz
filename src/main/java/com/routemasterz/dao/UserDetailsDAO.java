@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface UserDetailsDAO {
 
-    Optional<UserEntityDetails> findUserInfoByEmail(String email);
+    UserEntityDetails findUserInfoByEmail(String email);
+
+    void setNewPhone(Long id, int phoneNumber);
 }

@@ -8,4 +8,6 @@ public interface UserDAO {
     boolean existsUserWithEmail(String email);
 
     void save(UserEntity userEntity);
+
+    void setNewPassword(long id, String encode);
 }

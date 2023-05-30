@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(
@@ -142,6 +143,14 @@ public class UserEntity implements UserDetails {
         this.createdAt = createdAt;
     }
 
+    public UserEntityDetails getUserEntityDetails() {
+        return userEntityDetails;
+    }
+
+    public void setUserEntityDetails(UserEntityDetails userEntityDetails) {
+        this.userEntityDetails = userEntityDetails;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -151,5 +160,18 @@ public class UserEntity implements UserDetails {
                 ", password='" + password + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return getId() == that.getId() && getRole() == that.getRole() && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getCreatedAt(), that.getCreatedAt()) && Objects.equals(getUserEntityDetails(), that.getUserEntityDetails());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getRole(), getEmail(), getPassword(), getCreatedAt(), getUserEntityDetails());
     }
 }

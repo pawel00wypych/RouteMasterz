@@ -1,9 +1,8 @@
 package com.routemasterz.controller;
 
 import com.routemasterz.dto.GetUserRequest;
-import com.routemasterz.dto.SetEmailRequest;
+import com.routemasterz.dto.SetPhoneRequest;
 import com.routemasterz.dto.SetNewPasswordRequest;
-import com.routemasterz.service.UserService;
 import com.routemasterz.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,18 +23,18 @@ public class UserController {
         return userService.getLoggedUser(request);
     }
 
-    @PostMapping(path = "/setEmail",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String setEmail(@RequestBody SetEmailRequest request) {
-        return userService.setEmail(request);
+    @PostMapping(path = "/account/setNewPhone",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> setNewPhone(@RequestBody SetPhoneRequest request) {
+        return userService.setNewPhone(request);
     }
 
-    @PostMapping(path = "/setNewPassword",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String setNewPassword(@RequestBody SetNewPasswordRequest request) {
+    @PostMapping(path = "/account/setNewPassword",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> setNewPassword(@RequestBody SetNewPasswordRequest request) {
         return userService.setNewPassword(request);
     }
 
-    @PostMapping(path = "/logout",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String logout() {
-        return userService.logout();
+    @PostMapping(path = "/account/getUserDetails",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserDetails(@RequestBody GetUserRequest request) {
+        return userService.getUserDetails(request);
     }
 }

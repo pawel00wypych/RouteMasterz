@@ -12,7 +12,7 @@ public class UserEntityDetails {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private int id;
+    private long id;
     @OneToOne(mappedBy = "userEntityDetails",fetch = FetchType.EAGER)
     private UserEntity userEntity;
     @Column(
@@ -70,7 +70,7 @@ public class UserEntityDetails {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
