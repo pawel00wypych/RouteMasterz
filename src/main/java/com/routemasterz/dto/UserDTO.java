@@ -4,6 +4,7 @@ import com.routemasterz.model.Role;
 
 public record UserDTO(
         String email,
-        Role role
+        Role role,
+        String createdAt
 ) {
 }

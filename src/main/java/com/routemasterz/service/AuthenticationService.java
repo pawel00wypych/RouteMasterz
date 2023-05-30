@@ -20,8 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AuthenticationService {
@@ -60,9 +58,9 @@ public class AuthenticationService {
             UserDTO userDTO = userEntityDTOMapper.apply(principal);
             String token = jwtUtil.issueToken(userDTO.email(), userDTO.role().toString());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            Optional<UserEntityDetails> userInfo = userDetailsDAO.findUserInfoByEmail(userDTO.email());
+            UserEntityDetails userInfo = userDetailsDAO.findUserInfoByEmail(userDTO.email());
 
-            return new ResponseEntity<>(new AuthenticationResponse(token, "", "", "", "Login success"), HttpStatus.OK);
+            return new ResponseEntity<>(new AuthenticationResponse(token, userInfo.getName(), userInfo.getSurname(), "", "Login success"), HttpStatus.OK);
         } catch (AuthenticationException e) {
             return new ResponseEntity<>(new AuthenticationFailedResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -83,7 +81,7 @@ public class AuthenticationService {
                 request.name(),
                 request.surname(),
                 request.residence(),
-                "",
+                "TRANS-HANS",
                 111222333,
                 "",
                 LocalDate.now().toString()
