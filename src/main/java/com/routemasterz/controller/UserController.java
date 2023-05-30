@@ -1,10 +1,12 @@
 package com.routemasterz.controller;
 
+import com.routemasterz.dto.GetUserRequest;
 import com.routemasterz.dto.SetEmailRequest;
 import com.routemasterz.dto.SetNewPasswordRequest;
 import com.routemasterz.service.UserService;
 import com.routemasterz.service.UserService;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,9 +19,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/userAccount")
-    public String showUserAccountView() {
-        return "userAccount";
+    @PostMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getLoggedUser(@RequestBody GetUserRequest request) {
+        return userService.getLoggedUser(request);
     }
 
     @PostMapping(path = "/setEmail",  produces = MediaType.APPLICATION_JSON_VALUE)
