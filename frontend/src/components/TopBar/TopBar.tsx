@@ -37,6 +37,10 @@ interface PageProps {
 }
 
 function createURL(role: Role | undefined, dest: string): string {
+    console.log("role: "+role);
+    console.log("dest: "+dest);
+    console.log("userstate: "+getUserstate());
+
     switch (role) {
         case Role.ADMIN:
             return "/admin";
@@ -64,19 +68,19 @@ function createURL(role: Role | undefined, dest: string): string {
                                 src={pin}
                                 iconHeight={"60px"}
                                 iconWidth={"60px"}
-                                onClick={() => { window.location.replace(createURL(getUserstate()?.role, "/map"))}}
+                                onClick={() => { window.location.replace(createURL(getUserstate()?.role, "map"))}}
                                />
                     <Button className={buttonStyle.topBarButton}
                                 src={list}
                                 iconHeight={"60px"}
                                 iconWidth={"60px"}
-                                onClick={() => { window.location.replace(createURL(getUserstate()?.role, "/staff"))}}
+                                onClick={() => { window.location.replace(createURL(getUserstate()?.role, "staff"))}}
                             />
                     <Button className={buttonStyle.topBarButton}
                             src={truck}
                             iconHeight={"60px"}
                             iconWidth={"60px"}
-                            onClick={() => { window.location.replace(createURL(getUserstate()?.role, "/trucks"))}}
+                            onClick={() => { window.location.replace(createURL(getUserstate()?.role, "trucks"))}}
                             />
                     <div id={style.emptyDiv}/>
                     <NavLink to='/account'>

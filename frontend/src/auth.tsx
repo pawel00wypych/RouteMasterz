@@ -1,8 +1,8 @@
 import { NavigateFunction } from 'react-router-dom';
 
 const loginUrl = `${process.env.REACT_APP_BACKEND_URL}/auth/login`;
-const logoutUrl = `${process.env.REACT_APP_BACKEND_URL}/logout`;
-const fetchUserUrl = `${process.env.REACT_APP_BACKEND_URL}/account`;
+const logoutUrl = `${process.env.REACT_APP_BACKEND_URL}/auth/logout`;
+const fetchUserUrl = `${process.env.REACT_APP_BACKEND_URL}/app/user`;
 
 
 interface UserState {
@@ -29,7 +29,9 @@ export class InvalidSessionError extends Error {
 }
 
 export const removeSesionData = () => {
+    console.log("remove session data: "+sessionStorage);
     sessionStorage.removeItem('userToken');
+    sessionStorage.removeItem('USERSTATE');
 };
 
 export const logout = async () => {
@@ -59,6 +61,7 @@ export const validateUserState = (userState: UserState): userState is UserState 
     if (typeof userState.username !== 'string') return false;
     if (typeof userState.sessionStart !== 'string') return false;
     if (typeof userState.role !== 'number') return false;
+    console.log("validateUserState - userState.role: "+userState.role.toString());
 
     const date = new Date(userState.sessionStart);
     if (isNaN(date.getTime())) return false;
@@ -71,12 +74,17 @@ export const getUserstate = (): UserState | null => {
     const rawSession = sessionStorage.getItem('USERSTATE');
     if (rawSession === null) return null;
 
+    console.log("rawSession:  "+rawSession);
+
     try {
         const userState = JSON.parse(rawSession);
+        console.log("userState:  "+userState);
+
         if (!validateUserState(userState)) return null;
 
         return userState;
     } catch (err) {
+        console.log("getUserState error "+err);
         removeSesionData();
         return null;
     }
@@ -132,6 +140,8 @@ export const login = async (email: string, password: string, navigate: NavigateF
             .then((body) => {
                 console.log(body);
                 sessionStorage.setItem("userToken", body.token);
+                console.log("login sess-store-token: "+sessionStorage.getItem("userToken"));
+                updateUserState();
                 navigate("/account");
             });
 
@@ -155,8 +165,18 @@ export const validateUser = (user: User): user is User => {
 };
 
 export const fetchUser = async (): Promise<User | null> => {
+    const body = {
+        token: sessionStorage.getItem("userToken")
+    };
     const requestOptions = {
-        method: 'GET',
+        method: 'POST',
+        headers: {
+            'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true'
+        },
+        body: JSON.stringify(body),
     };
 
     try {
@@ -167,7 +187,9 @@ export const fetchUser = async (): Promise<User | null> => {
         if (!validateUser(user)) return null;
 
         return user;
-    } catch (err) { }
+    } catch (err) {
+        console.log("fetchUser error "+ err);
+    }
 
     return null;
 };
@@ -175,6 +197,6 @@ export const fetchUser = async (): Promise<User | null> => {
 export const updateUserState = async (): Promise<void> => {
     const user = await fetchUser();
     if (user === null) return removeSesionData();
-
+    console.log("updateUserState user:"+user);
     setUserState(user.username, user.role);
 };
