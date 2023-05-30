@@ -18,8 +18,9 @@ export enum Role {
 }
 
 interface User {
-    username: string;
+    email: string;
     role: Role;
+    createdAt: string;
 }
 
 export class InvalidSessionError extends Error {
@@ -150,7 +151,7 @@ export const login = async (email: string, password: string, navigate: NavigateF
 
 export const validateUser = (user: User): user is User => {
     if (typeof user !== 'object') return false;
-    if (typeof user.username !== 'string') return false;
+    if (typeof user.email !== 'string') return false;
     if (typeof user.role !== 'string') return false;
 
     switch (user.role) {
@@ -198,5 +199,5 @@ export const updateUserState = async (): Promise<void> => {
     const user = await fetchUser();
     if (user === null) return removeSesionData();
     console.log("updateUserState user:"+user);
-    setUserState(user.username, user.role);
+    setUserState(user.email, user.role);
 };
