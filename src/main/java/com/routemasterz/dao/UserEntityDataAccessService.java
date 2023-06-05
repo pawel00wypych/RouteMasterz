@@ -4,6 +4,7 @@ import com.routemasterz.model.UserEntityDetails;
 import com.routemasterz.repository.UserEntityDetailsRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository("userDetailsJpa")

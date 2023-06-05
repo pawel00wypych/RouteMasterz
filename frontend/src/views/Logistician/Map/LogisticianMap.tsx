@@ -241,6 +241,7 @@ function LogisticianMap() {
         const data = {
             checkpoints: toArray(),
             routeName: routeName,
+            token: sessionStorage.getItem("userToken"),
         };
 
         console.log(data);

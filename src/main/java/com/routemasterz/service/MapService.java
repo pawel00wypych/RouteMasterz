@@ -2,11 +2,14 @@ package com.routemasterz.service;
 
 import com.routemasterz.dao.CheckpointsDAO;
 import com.routemasterz.dao.RoutesDAO;
+import com.routemasterz.dao.UserDAO;
 import com.routemasterz.dto.CheckpointDTO;
 import com.routemasterz.dto.SaveRouteRequest;
 import com.routemasterz.dto.SetPlaceRequest;
 import com.routemasterz.model.Checkpoint;
 import com.routemasterz.model.Route;
+import com.routemasterz.model.UserEntity;
+import com.routemasterz.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +24,16 @@ public class MapService {
 
     private final RoutesDAO routesDAO;
     private final CheckpointsDAO checkpointsDAO;
+    private final JWTUtil jwtUtil;
+    private final UserDAO userDAO;
 
     public MapService(@Qualifier("routesJPA") RoutesDAO routesDAO,
-                      @Qualifier("checkpointsJPA") CheckpointsDAO checkpointsDAO) {
+                      @Qualifier("checkpointsJPA") CheckpointsDAO checkpointsDAO, JWTUtil jwtUtil,
+                      @Qualifier("jpa") UserDAO userDAO) {
         this.routesDAO = routesDAO;
         this.checkpointsDAO = checkpointsDAO;
+        this.jwtUtil = jwtUtil;
+        this.userDAO = userDAO;
     }
 
 
@@ -36,7 +44,10 @@ public class MapService {
     public ResponseEntity<?> saveRoute(SaveRouteRequest request) {
         try {
             List<Checkpoint> checkpoints = new LinkedList<>();
-            Route route = new Route(request.routeName(), LocalDate.now().toString());
+            String email = jwtUtil.getSubject(request.token());
+            UserEntity logistician = userDAO.findUserByEmail(email);
+
+            Route route = new Route(request.routeName(), LocalDate.now().toString(), logistician);
             int i = 0;
             routesDAO.save(route);
 
