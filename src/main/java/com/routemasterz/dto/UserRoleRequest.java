@@ -1,4 +1,5 @@
 package com.routemasterz.dto;
 
-public record UserRoleRequest() {
+public record UserRoleRequest(Long userId,
+                              String newRole) {
 }

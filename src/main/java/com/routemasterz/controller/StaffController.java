@@ -2,9 +2,11 @@ package com.routemasterz.controller;
 
 import com.routemasterz.dto.DeleteRouteRequest;
 import com.routemasterz.dto.ShowRoutesRequest;
+import com.routemasterz.dto.UserCompanyRequest;
 import com.routemasterz.dto.UserRoleRequest;
 import com.routemasterz.service.StaffService;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,14 +19,19 @@ public class StaffController {
         this.staffService = staffService;
     }
 
-    @GetMapping(path = "/admin")
-    public String adminPanel() {
-        return null;
+    @PostMapping(path = "/admin/changeUserRole",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> changeUserRole(@RequestBody UserRoleRequest request) {
+        return staffService.changeUserRole(request);
     }
 
-    @PostMapping(path = "/admin/changeUserRole",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String changeUserRole(@RequestBody UserRoleRequest request) {
-        return staffService.changeUserRole(request);
+    @PostMapping(path = "/admin/changeUserCompany",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> changeUserCompany(@RequestBody UserCompanyRequest request) {
+        return staffService.changeUserCompany(request);
+    }
+
+    @GetMapping(path = "/admin/showAllUsers",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> showAllUsers() {
+        return staffService.showAllUsers();
     }
 
     @GetMapping(path = "/driver/showJobDetails",  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,13 +39,13 @@ public class StaffController {
         return null;
     }
 
-    @GetMapping(path = "/logistician/showRoutes",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String showRoutes(@RequestBody ShowRoutesRequest request) {
+    @PostMapping(path = "/logistician/showRoutes",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> showRoutes(@RequestBody ShowRoutesRequest request) {
         return staffService.showRoutes(request);
     }
 
     @PostMapping(path = "/logistician/deleteRoute",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public String deleteRoute(@RequestBody DeleteRouteRequest request) {
+    public ResponseEntity<?> deleteRoute(@RequestBody DeleteRouteRequest request) {
         return staffService.deleteRoute(request);
     }
 }

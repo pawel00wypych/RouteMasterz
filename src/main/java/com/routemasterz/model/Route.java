@@ -1,9 +1,8 @@
 package com.routemasterz.model;
 
 import jakarta.persistence.*;
-import com.routemasterz.model.Checkpoint;
+
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(
@@ -31,16 +30,22 @@ public class Route {
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Checkpoint> checkpoints;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "logistician_id")
+    private UserEntity logistician;
+
     public Route() {
     }
-    public Route(String name, String createdAt) {
+    public Route(String name, String createdAt, UserEntity logistician) {
         this.name = name;
         this.createdAt = createdAt;
+        this.logistician = logistician;
     }
-    public Route(int id, String name, String createdAt) {
+    public Route(int id, String name, String createdAt, UserEntity logistician) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
+        this.logistician = logistician;
     }
 
     public String getName() {

@@ -4,6 +4,8 @@ import com.routemasterz.model.Route;
 import com.routemasterz.repository.RoutesRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("routesJPA")
 public class RoutesDataAccessService implements RoutesDAO{
 
@@ -16,5 +18,15 @@ public class RoutesDataAccessService implements RoutesDAO{
     @Override
     public void save(Route route) {
         repository.save(route);
+    }
+
+    @Override
+    public List<Route> findAllRoutesById(Long logisticianId) {
+        return repository.findAllRoutesById(logisticianId);
+    }
+
+    @Override
+    public void removeRoute(Long routeId) {
+        repository.removeRouteById(routeId);
     }
 }
