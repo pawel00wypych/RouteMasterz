@@ -24,9 +24,7 @@ function Staff() {
 
                     </CustomContainer>
                     <CustomContainer className={style.user}>
-                        <WorkerContainer workerInfo={" Will Smith\n will@email.com"}
-                                         residence={"Warsaw"}
-                                         truckInfo={"MAN TGS 18.460"}/>
+
                         <RouteContainer></RouteContainer>
                     </CustomContainer>
                 </MidContainer>

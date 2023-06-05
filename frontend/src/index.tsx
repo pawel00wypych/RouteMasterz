@@ -15,7 +15,7 @@ import WorkInfo from "./views/Driver/WorkInfo/WorkInfo";
 import Staff from "./views/Logistician/Staff/Staff";
 import Admin from "./views/Admin/Admin";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
-import { isLoggedIn } from './auth';
+import { isLoggedIn, isAdmin, isLogistician, isDriver } from './auth';
 
 const router = createBrowserRouter([
     {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     {
         path: '/logistician/map',
         element: <RestrictedRoute
-            condition={isLoggedIn}
+            condition={isLogistician}
             component={<LogisticianMap/>}
             invalidComponent={<Login/>}
         />,
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         path: '/driver/map',
         element:
             <RestrictedRoute
-                condition={isLoggedIn}
+                condition={isDriver}
                 component={<DriverMap/>}
                 invalidComponent={<Login/>}
             />,
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         path: '/driver/trucks',
         element:
             <RestrictedRoute
-                condition={isLoggedIn}
+                condition={isDriver}
                 component={<DriverTruck/>}
                 invalidComponent={<Login/>}
             />,
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         path: '/driver/staff',
         element:
             <RestrictedRoute
-                condition={isLoggedIn}
+                condition={isDriver}
                 component={<WorkInfo />}
                 invalidComponent={<Login/>}
             />,
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
         path: '/logistician/trucks',
         element:
             <RestrictedRoute
-                condition={isLoggedIn}
+                condition={isLogistician}
                 component={<LogisticianTrucks/>}
                 invalidComponent={<Login/>}
             />,
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
         path: '/logistician/staff',
         element:
             <RestrictedRoute
-                condition={isLoggedIn}
+                condition={isLogistician}
                 component={<Staff />}
                 invalidComponent={<Login/>}
             />,
@@ -101,7 +101,7 @@ const router = createBrowserRouter([
         path: '/admin',
         element:
             <RestrictedRoute
-                condition={isLoggedIn}
+                condition={isAdmin}
                 component={<Admin />}
                 invalidComponent={<Login/>}
             />,

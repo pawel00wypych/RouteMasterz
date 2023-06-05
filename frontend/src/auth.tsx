@@ -119,6 +119,24 @@ export const isAdmin = (): boolean => {
     return userState.role === Role.ADMIN;
 };
 
+export const isLogistician = (): boolean => {
+    if (!isLoggedIn()) return false;
+
+    const userState = getUserstate();
+    if (userState === null) return false;
+
+    return userState.role === Role.LOGISTICIAN;
+};
+
+export const isDriver = (): boolean => {
+    if (!isLoggedIn()) return false;
+
+    const userState = getUserstate();
+    if (userState === null) return false;
+
+    return userState.role === Role.DRIVER;
+};
+
 export const login = async (email: string, password: string, navigate: NavigateFunction): Promise<string | void> => {
 
     const body = {

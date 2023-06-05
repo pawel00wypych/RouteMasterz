@@ -24,9 +24,7 @@ function WorkInfo() {
                         <img src={logo} className={accountStyle.logo} alt={''}/>
                     </div>
                     <CustomContainer className={style.user}>
-                        <WorkerContainer workerInfo={" Will Smith\n will@email.com"}
-                                         residence={"Warsaw"}
-                                         truckInfo={"MAN TGS 18.460"}/>
+
                         <RouteContainer></RouteContainer>
                     </CustomContainer>
                 </MidContainer>
