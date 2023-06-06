@@ -27,9 +27,7 @@ function LogisticianTrucks() {
                 <TopBar/>
                 <MidContainer>
                     <CustomContainer className={style.user}>
-                        <WorkerContainer workerInfo={" Will Smith\n will@email.com"}
-                                         residence={"Warsaw"}
-                                         truckInfo={"MAN TGS 18.460"}/>
+
                     </CustomContainer>
                     <CustomContainer className={style.setRoutes}>
                         <div id={style.employee}>

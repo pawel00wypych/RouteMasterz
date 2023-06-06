@@ -16,17 +16,6 @@ public class TrucksFleetController {
         this.truckService = truckService;
     }
 
-
-    @GetMapping(path = "/driver/truck")
-    public String truckInfo() {
-        return null;
-    }
-
-    @GetMapping(path = "/logistician/trucks")
-    public String availableTrucks() {
-        return null;
-    }
-
     @PostMapping(path = "/driver/truck",  produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String setTruckInfo(@RequestBody SetTruckInfoRequest request) {

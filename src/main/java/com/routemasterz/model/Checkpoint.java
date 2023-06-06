@@ -1,6 +1,9 @@
 package com.routemasterz.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(
@@ -12,10 +15,11 @@ public class Checkpoint {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_id")
+    @JsonBackReference
     private Route route;
 
     private String country;
@@ -33,7 +37,7 @@ public class Checkpoint {
     public Checkpoint() {
     }
 
-    public Checkpoint(int id, Route route, String country, String street, String city, String state, String postalcode, String hour, int checkpointOrder) {
+    public Checkpoint(Long id, Route route, String country, String street, String city, String state, String postalcode, String hour, int checkpointOrder) {
         this.id = id;
         this.route = route;
         this.country = country;
@@ -56,11 +60,11 @@ public class Checkpoint {
         this.checkpointOrder = checkpointOrder;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -126,5 +130,32 @@ public class Checkpoint {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    @Override
+    public String toString() {
+        return "Checkpoint{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", postalcode='" + postalcode + '\'' +
+                ", hour='" + hour + '\'' +
+                ", checkpointOrder=" + checkpointOrder +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Checkpoint that = (Checkpoint) o;
+        return getCheckpointOrder() == that.getCheckpointOrder() && Objects.equals(getId(), that.getId()) && Objects.equals(getCountry(), that.getCountry()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getCity(), that.getCity()) && Objects.equals(getState(), that.getState()) && Objects.equals(getPostalcode(), that.getPostalcode()) && Objects.equals(getHour(), that.getHour());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCountry(), getStreet(), getCity(), getState(), getPostalcode(), getHour(), getCheckpointOrder());
     }
 }

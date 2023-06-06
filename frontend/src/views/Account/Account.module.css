@@ -64,11 +64,6 @@
     padding: 2em;
 }
 
-.userInfoText {
-
-    font-size: 26px;
-}
-
 .bottomContainer {
     display: flex;
     flex-direction: row;

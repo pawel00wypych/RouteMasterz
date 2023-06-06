@@ -19,11 +19,6 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @GetMapping(path = "/driver/map/routes")
-    public String showDriverRoutes() {
-        return null;
-    }
-
     @PostMapping(path = "/logistician/map/setPlace",  produces = MediaType.APPLICATION_JSON_VALUE)
     public String setPlace(@RequestBody SetPlaceRequest request) {
         return mapService.setPlace(request);

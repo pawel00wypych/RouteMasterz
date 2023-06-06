@@ -11,9 +11,42 @@ import CustomContainer from "../../components/Containers/CustomContainer/CustomC
 // @ts-ignore
 import style from "./Admin.module.css";
 import WorkerContainer from "../../components/Containers/WorkerContainer/WorkerContainer";
-
+import React, { useState, useEffect } from "react";
+const fetchAdminUsersUrl = `${process.env.REACT_APP_BACKEND_URL}/app/admin/showAllUsers`;
 
 function Admin() {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+
+        const fetchUsers = async () => {
+
+            const requestOptions = {
+                method: 'GET',
+                headers: {
+                    'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Credentials': 'true'
+                },
+            };
+
+            try {
+                const resp = await fetch(fetchAdminUsersUrl, requestOptions)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("data: " + data);
+                        setUsers(data);
+                    });
+            } catch (err) {
+                console.log("show all non admin users error " + err);
+            }
+        }
+
+        fetchUsers();
+    }, []);
+
 
     return (
         <Page>
@@ -24,6 +57,7 @@ function Admin() {
                         <img src={logo} className={accountStyle.logo} alt={''}/>
                     </div>
                     <CustomContainer className={style.user}>
+                        <WorkerContainer users={users}></WorkerContainer>
                     </CustomContainer>
                 </MidContainer>
             </MainContainer>
