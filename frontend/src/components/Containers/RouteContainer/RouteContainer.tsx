@@ -1,4 +1,4 @@
-import {Component, HTMLAttributes} from 'react';
+import React, {Component, HTMLAttributes} from 'react';
 
 // @ts-ignore
 import style from './RouteContainer.module.css'
@@ -7,32 +7,65 @@ import truck from "../../../resources/img/truck.svg";
 // @ts-ignore
 import house from "../../../resources/img/house.svg";
 // @ts-ignore
-import worker from "../../../resources/img/worker.svg";
+import routeIcon from "../../../resources/img/route.svg";
+// @ts-ignore
+import pinIcon from "../../../resources/img/whitePin.svg";
 
-export interface RouteContainerProps extends HTMLAttributes<HTMLDivElement> {
-    shadows?: boolean,
-    workerInfo?: string,
-    residence?: string,
-    truckInfo?: string,
-    width?: string,
-    height?: string,
-    className?: string;
+// @ts-ignore
+import buttonStyle from "../../Buttons/FormButton.module.css";
+
+interface Checkpoint {
+    id: number;
+    country: string;
+    street: string;
+    city: string;
+    state: string;
+    postalcode: string;
+    hour: string;
 }
 
-class RouteContainer extends Component<RouteContainerProps> {
+interface Route {
+    id: number;
+    name: string;
+    checkpoints: Checkpoint[];
+}
 
-    private static defaultProps: RouteContainerProps = {
-        shadows: true,
-    };
-    render() {
-        return (
-            <div className={style.mainContainer}
-                 style={{ width: this.props.width, height: this.props.height }}>
-                {this.props.children}
+interface CustomContainerProps {
+    routes: Route[];
+}
 
-            </div>
-        );
-    }
+function RouteContainer({ routes }: CustomContainerProps) {
+
+
+    return (
+        <div className={style.mainContainer}>
+            {routes.map((route) => (
+                <div
+                     key={route.id}>
+                    <div className={style.routeIcon}>
+                        <img src={routeIcon} alt="route icon" />
+                    </div>
+                    {route.name}
+                    {route.checkpoints.map((checkpoint) => (
+                    <div key={checkpoint.id}>
+                        <div className={style.routeIcon}>
+                            <img src={pinIcon} alt="pin icon" />
+                        </div>
+                        <div className={style.basic}>
+                        {checkpoint.country} {checkpoint.street} {checkpoint.city} {checkpoint.state} {checkpoint.postalcode}
+                        </div>
+                        <div>
+                            {checkpoint.hour}
+                        </div>
+                    </div>
+
+                    ))}
+                </div>
+            ))}
+
+        </div>
+    );
+
 }
 
 export default RouteContainer;

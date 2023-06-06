@@ -24,8 +24,6 @@ function WorkInfo() {
                         <img src={logo} className={accountStyle.logo} alt={''}/>
                     </div>
                     <CustomContainer className={style.user}>
-
-                        <RouteContainer></RouteContainer>
                     </CustomContainer>
                 </MidContainer>
             </MainContainer>
